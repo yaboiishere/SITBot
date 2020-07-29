@@ -1,0 +1,2 @@
+module GifgetterHelper
+end

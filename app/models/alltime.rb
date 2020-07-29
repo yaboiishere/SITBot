@@ -1,0 +1,2 @@
+class Alltime < ApplicationRecord
+end

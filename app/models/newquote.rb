@@ -1,0 +1,2 @@
+class Newquote < ApplicationRecord
+end

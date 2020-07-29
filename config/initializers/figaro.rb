@@ -1,0 +1,1 @@
+Figaro.require_keys("google_project_id","GOOGLE_APPLICATION_CREDENTIALS")

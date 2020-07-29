@@ -1,0 +1,2 @@
+class Docpoint < ApplicationRecord
+end

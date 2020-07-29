@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5">
+      
+    </div>
+    <div class="col-lg-5 form_centered">
+		<h2>
+		  <strong>Gif name:</strong>
+		  <%= @gif.gif_name %>
+		</h2>
+
+		<h2>
+		  <strong>Gif description:</strong>
+		  <%= @gif.description %>
+		</h2>
+		<!-- 
+		<h2>
+		  <strong>Gif tags:</strong>
+		  <%= @gif.gif_tags %>
+		</h2> -->
+
+		<%= link_to 'Edit', edit_gif_path(@gif), class: "btn btn-primary" %> |
+		<%= link_to 'Back', gifs_path, class: "btn btn-warning" %>
+	</div>
+</div>

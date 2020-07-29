@@ -1,0 +1,2 @@
+class Opt < ApplicationRecord
+end

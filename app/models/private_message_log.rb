@@ -1,0 +1,2 @@
+class PrivateMessageLog < ApplicationRecord
+end
