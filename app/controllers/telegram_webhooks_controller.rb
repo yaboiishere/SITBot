@@ -833,7 +833,12 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     if update["message"]["left_chat_member"]  
       n = update["message"]["left_chat_member"]  
       handle = n["username"].nil? ? "#{n["first_name"]} #{n["last_name"]}" : "#{n["username"]}"
-      insults = ["@#{handle} finally fucking left", "@#{handle} left. Thank God", "@#{handle} what a lil bitch"]
+      insults = 
+      [
+        "@#{handle} finally fucking left",
+        "@#{handle} left. Thank God",
+        "@#{handle} what a lil bitch"
+      ]
       insult = insults[rand(insults.count)]
       bot.send_message chat_id: chat["id"],  text: "#{insult}"
       return
@@ -842,14 +847,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       if update["message"]["text"].include? "@everyone"
         users = String.new
         TelegramUser.all.each do |u|
-          begin
-            tuser = bot.get_chat_member user_id: u.telegramid.to_i, chat_id: chat["id"]
-            status = tuser["result"]["status"]
-            if status == "creator" || status == "member" || status == "administrator" || status == "restricted"
-              users+="@#{u.name} "
-            end
-          rescue => Telegram::Bot::Error
-            nil
+          tuser = bot.get_chat_member user_id: u.telegramid.to_i, chat_id: chat["id"]
+          status = tuser["result"]["status"]
+          if status == "creator" || status == "member" || status == "administrator" || status == "restricted"
+            users+="@#{u.name} "
           end
         end
         bot.send_message chat_id: chat["id"], text: users
