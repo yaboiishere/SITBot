@@ -842,10 +842,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       if update["message"]["text"].include? "@everyone"
         users = String.new
         TelegramUser.all.each do |u|
-          tuser = bot.get_chat_member user_id: u.telegramid.to_i, chat_id: chat["id"]
-          status = tuser["result"]["status"]
-          if status == "creator" || status == "member" || status == "administrator" || status == "restricted"
-            users+="@#{u.name} "
+          begin
+            tuser = bot.get_chat_member user_id: u.telegramid.to_i, chat_id: chat["id"]
+            status = tuser["result"]["status"]
+            if status == "creator" || status == "member" || status == "administrator" || status == "restricted"
+              users+="@#{u.name} "
+            end
+          rescue => Telegram::Bot::Error
+            nil
           end
         end
         bot.send_message chat_id: chat["id"], text: users
